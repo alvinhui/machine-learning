@@ -1,0 +1,8 @@
+{
+  "name": "tree",
+  "version": "1.0.0",
+  "description": "决策树",
+  "dependencies": {
+    "mnist": "^1.1.0"
+  }
+}
