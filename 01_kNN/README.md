@@ -1,4 +1,4 @@
-# kNN - k 近邻算法
+# k 近邻算法
 
 * [kNN.js](kNN.js): k-NN 算法实现
 * [kNN_test.js](kNN_test.js): k-NN 算法试用
