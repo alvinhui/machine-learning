@@ -1,0 +1,11 @@
+{
+  "name": "naive-bayes",
+  "version": "1.0.0",
+  "main": "naiveBayes.js",
+  "dependencies": {
+    "mathjs": "^3.18.0"
+  },
+  "engines": {
+    "node": ">= 8.0.0"
+  }
+}
