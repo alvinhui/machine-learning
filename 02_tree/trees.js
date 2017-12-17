@@ -74,6 +74,7 @@ function splitDataSet(dataSet, axis, value) {
       let reducedFeatVec = featVec.slice(0, axis);
       reducedFeatVec = reducedFeatVec.concat(featVec.slice(axis + 1));
       debug('reducedFeatVec %o', reducedFeatVec);
+
       retDataSet.push(reducedFeatVec);
     }
   }
@@ -126,7 +127,7 @@ function createTree(dataSet, labels) {
   }
 
   // 找到最佳划分数据集的特征
-  const bestFeat = chooseBestFeatureToSplit(dataSet, debug);
+  const bestFeat = chooseBestFeatureToSplit(dataSet);
   debug('bestFeat %s', bestFeat);
 
   const bestFeatLabel = labels[bestFeat];
@@ -137,8 +138,8 @@ function createTree(dataSet, labels) {
   debug('uniqueValues %o', uniqueValues);
 
   uniqueValues.forEach((value) => {
+    const newDataSet = splitDataSet(dataSet, bestFeat, value);
     const subLabels = labels.filter((label, key) => key !== bestFeat);
-    const newDataSet = splitDataSet(dataSet, bestFeat, value, debug);
     myTree[bestFeatLabel][value] = createTree(newDataSet, subLabels)
   });
 
