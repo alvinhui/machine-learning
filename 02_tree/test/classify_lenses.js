@@ -1,4 +1,5 @@
-const {createTree, createLenses, classify, storeTree} = require('../trees');
+const {createTree, classify, storeTree} = require('../trees');
+const {createLenses} = require('../helps');
 
 const lenses = createLenses();
 const lensesLabels = ['age', 'prescript', 'astigmatic', 'terRate'];

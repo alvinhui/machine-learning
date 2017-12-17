@@ -1,4 +1,5 @@
-const {chooseBestFeatureToSplit, createDataSet} = require('../trees');
+const {chooseBestFeatureToSplit} = require('../trees');
+const {createDataSet} = require('../helps');
 
 const {dataSet} = createDataSet();
 console.log(dataSet);

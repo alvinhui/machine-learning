@@ -2,49 +2,6 @@ const debug  = require('debug')('trees:index');
 const {log2, uniqueDataSetColumn, majorityCnt} = require('./helps');
 const fs = require('fs');
 
-function createDataSet() {
-  const dataSet = [
-    [1, 1, 'yes'],
-    [1, 0, 'no'],
-    [0, 1, 'no'],
-    [0, 0, 'no']
-  ];
-  const labels = ['no surfacing','flippers'];
-  return {
-    dataSet,
-    labels
-  };
-}
-
-function createLenses() {
-  return [
-    ['young', 'myope', 'no', 'reduced', 'no lenses'],
-    ['young', 'myope', 'no', 'normal', 'soft'],
-    ['young', 'myope', 'yes', 'reduced', 'no lenses'],
-    ['young', 'myope', 'yes', 'normal', 'hard'],
-    ['young', 'hyper', 'no', 'reduced', 'no lenses'],
-    ['young', 'hyper', 'no', 'normal', 'soft'],
-    ['young', 'hyper', 'yes', 'reduced', 'no lenses'],
-    ['young', 'hyper', 'yes', 'normal', 'hard'],
-    ['pre', 'myope', 'no', 'reduced', 'no lenses'],
-    ['pre', 'myope', 'no', 'normal', 'soft'],
-    ['pre', 'myope', 'yes', 'reduced', 'no lenses'],
-    ['pre', 'myope', 'yes', 'normal', 'hard'],
-    ['pre', 'hyper', 'no', 'reduced', 'no lenses'],
-    ['pre', 'hyper', 'no', 'normal', 'soft'],
-    ['pre', 'hyper', 'yes', 'reduced', 'no lenses'],
-    ['pre', 'hyper', 'yes', 'normal', 'no lenses'],
-    ['presbyopic', 'myope', 'no', 'reduced', 'no lenses'],
-    ['presbyopic', 'myope', 'no', 'normal', 'no lenses'],
-    ['presbyopic', 'myope', 'yes', 'reduced', 'no lenses'],
-    ['presbyopic', 'myope', 'yes', 'normal', 'hard'],
-    ['presbyopic', 'hyper', 'no', 'reduced', 'no lenses'],
-    ['presbyopic', 'hyper', 'no', 'normal', 'soft'],
-    ['presbyopic', 'hyper', 'yes', 'reduced', 'no lenses'],
-    ['presbyopic', 'hyper', 'yes', 'normal', 'no lenses'],
-  ];
-}
-
 function calcShannonEnt(dataSet) {
   const labelCounts = {};
   for (let featVec of dataSet) {
@@ -168,13 +125,11 @@ function grabTree(filename) {
 }
 
 module.exports = {
-  createDataSet,
   calcShannonEnt,
   splitDataSet,
   chooseBestFeatureToSplit,
   createTree,
   classify,
   storeTree,
-  grabTree,
-  createLenses
+  grabTree
 };

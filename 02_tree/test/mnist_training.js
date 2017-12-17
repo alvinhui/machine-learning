@@ -1,10 +1,10 @@
-const {createTree, createLenses, classify, storeTree} = require('../trees');
+const {createTree, storeTree} = require('../trees');
 const {toZeroOne} = require('../helps');
-const {trainingData} = require('./mnist_data');
+const mnist = require('mnist');
 const path = require('path');
 
 // 1. 收集数据
-const mnist = require('mnist');
+const {trainingData} = require('./mnist_data');
 
 // 2. 准备数据
 let data = [];

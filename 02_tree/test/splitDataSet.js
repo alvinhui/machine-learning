@@ -1,4 +1,5 @@
-const {splitDataSet, createDataSet} = require('../trees');
+const {splitDataSet} = require('../trees');
+const {createDataSet} = require('../helps');
 
 const {dataSet} = createDataSet();
 // console.log(dataSet);

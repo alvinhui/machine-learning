@@ -1,4 +1,5 @@
-const {calcShannonEnt, createDataSet} = require('../trees');
+const {calcShannonEnt} = require('../trees');
+const {createDataSet} = require('../helps');
 
 const {dataSet} = createDataSet();
 console.log(calcShannonEnt(dataSet));

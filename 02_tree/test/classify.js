@@ -1,6 +1,7 @@
 process.env.DEBUG = 'trees:*';
 
-const {createTree, createDataSet, classify} = require('../trees');
+const {createTree, classify} = require('../trees');
+const {createDataSet} = require('../helps');
 
 const {dataSet, labels} = createDataSet();
 console.log(labels)

@@ -1,4 +1,5 @@
-const {createTree, createDataSet} = require('../trees');
+const {createTree} = require('../trees');
+const {createDataSet} = require('../helps');
 
 const {dataSet, labels} = createDataSet();
 console.log(dataSet)
