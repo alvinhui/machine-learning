@@ -1,17 +1,5 @@
 const math = require('mathjs');
 
-function createList(length, number = 0) {
-  const list = [];
-  for (const i = 0; length > i; i++) {
-    list.push(number);
-  }
-  return list;
-}
-
-function addVec(v1, v2) {
-
-}
-
 function loadDataSet() {
   const document = [
     ['my', 'dog', 'has', 'flea', 'problems', 'help', 'please'],
