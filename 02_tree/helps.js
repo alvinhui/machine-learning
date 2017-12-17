@@ -1,11 +1,12 @@
 function createDataSet() {
   const dataSet = [
     [1, 1, 'yes'],
+    [1, 1, 'yes'],
     [1, 0, 'no'],
     [0, 1, 'no'],
     [0, 0, 'no']
   ];
-  const labels = ['no surfacing','flippers'];
+  const labels = ['flight', 'wing'];
   return {
     dataSet,
     labels
