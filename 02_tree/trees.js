@@ -1,3 +1,4 @@
+const debug  = require('debug')('trees:index');
 const {log2, uniqueDataSetColumn, majorityCnt} = require('./helps');
 const fs = require('fs');
 
@@ -66,23 +67,23 @@ function calcShannonEnt(dataSet) {
   return shannonEnt;
 }
 
-function splitDataSet(dataSet, axis, value, debug = false) {
+function splitDataSet(dataSet, axis, value) {
   const retDataSet = [];
   for (let featVec of dataSet) {
     if (featVec[axis] === value) {
       let reducedFeatVec = featVec.slice(0, axis);
       reducedFeatVec = reducedFeatVec.concat(featVec.slice(axis + 1));
-      debug && console.log('reducedFeatVec', JSON.stringify(reducedFeatVec));
+      debug('reducedFeatVec %o', reducedFeatVec);
       retDataSet.push(reducedFeatVec);
     }
   }
 
-  debug && console.log('retDataSet', JSON.stringify(retDataSet));
+  debug('retDataSet %o', retDataSet);
 
   return retDataSet;
 }
 
-function chooseBestFeatureToSplit(dataSet, debug = false) {
+function chooseBestFeatureToSplit(dataSet) {
   const numberFeatures = dataSet[0].length  - 1;
   let baseEntropy = calcShannonEnt(dataSet);
   let bestInfoGain = 0.0;
@@ -105,7 +106,7 @@ function chooseBestFeatureToSplit(dataSet, debug = false) {
   return bestFeature;
 }
 
-function createTree(dataSet, labels, debug = false) {
+function createTree(dataSet, labels) {
   const classList = dataSet.map((elements) => elements[elements.length - 1]);
   
   // 当所有的分类都属于同一类目时，停止划分数据
@@ -124,18 +125,23 @@ function createTree(dataSet, labels, debug = false) {
     return majorityCnt(classList);
   }
 
+  // 找到最佳划分数据集的特征
   const bestFeat = chooseBestFeatureToSplit(dataSet, debug);
-  debug && console.log('bestFeat', bestFeat);
+  debug('bestFeat %s', bestFeat);
 
   const bestFeatLabel = labels[bestFeat];
   const myTree = {[bestFeatLabel]: {}};
+
+  // 获得特征的枚举值
   const uniqueValues = uniqueDataSetColumn(dataSet, bestFeat);
-  debug && console.log('uniqueValues', uniqueValues);
+  debug('uniqueValues %o', uniqueValues);
 
   uniqueValues.forEach((value) => {
     const subLabels = labels.filter((label, key) => key !== bestFeat);
-    myTree[bestFeatLabel][value] = createTree(splitDataSet(dataSet, bestFeat, value, debug), subLabels)
+    const newDataSet = splitDataSet(dataSet, bestFeat, value, debug);
+    myTree[bestFeatLabel][value] = createTree(newDataSet, subLabels)
   });
+
   return myTree;
 }
 

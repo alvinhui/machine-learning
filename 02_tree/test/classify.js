@@ -1,3 +1,5 @@
+process.env.DEBUG = 'trees:*';
+
 const {createTree, createDataSet, classify} = require('../trees');
 
 const {dataSet, labels} = createDataSet();
