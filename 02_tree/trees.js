@@ -42,11 +42,11 @@ function splitDataSet(dataSet, axis, value) {
 }
 
 function chooseBestFeatureToSplit(dataSet) {
-  const numberFeatures = dataSet[0].length  - 1;
+  const numberFeatures = dataSet[0].length;
   let baseEntropy = calcShannonEnt(dataSet);
   let bestInfoGain = 0.0;
   let bestFeature = -1;
-  for (let i = 0; numberFeatures > i; i++) {
+  for (let i = 0, length = numberFeatures - 1; length > i; i++) {
     const uniqueValues = uniqueDataSetColumn(dataSet, i);
     let newEntropy = 0.0;
     uniqueValues.forEach((value) => {
