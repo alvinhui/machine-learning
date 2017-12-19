@@ -2,9 +2,10 @@ const {createTree, storeTree} = require('../trees');
 const {toZeroOne} = require('../helps');
 const mnist = require('mnist');
 const path = require('path');
+const fs = require('fs');
 
-// 1. 收集数据
-const {trainingData} = require('./mnist_data');
+// 1. 加载数据
+const trainingData = JSON.parse(fs.readFileSync(path.join(__dirname, 'mnist_trainingData.json'), 'utf8'));
 
 // 2. 准备数据
 let data = [];

@@ -85,7 +85,7 @@ function createTree(dataSet, labels) {
 
   // 数据集中没有其余特征时，停止划分数据，根据出现次数最多的类别作为返回值
   if (dataSet[0].length === 1) {
-    return majorityCnt(classList);
+    return majority(classList);
   }
 
   // 1. 找到最佳划分数据集的特征
@@ -125,7 +125,7 @@ function classify(inputTree, featLabels, testVec) {
 }
 
 function storeTree(inputTree, filename) {
-  fs.writeFileSync(filename, JSON.stringify(inputTree))
+  fs.writeFileSync(filename, JSON.stringify(inputTree));
 }
 
 function grabTree(filename) {

@@ -2,7 +2,11 @@ const {classify, grabTree} = require('../trees');
 const {toZeroOne} = require('../helps');
 const mnist = require('mnist');
 const path = require('path');
-const {testData, testCount} = require('./mnist_data');
+const fs = require('fs');
+
+// 1. 加载测试数据
+const testData = JSON.parse(fs.readFileSync(path.join(__dirname, 'mnist_testData.json'), 'utf8'));
+const testCount = testData.length;
 
 // 使用知识信息
 const tree = grabTree(path.join(__dirname, './mnist_tree.txt'));
@@ -22,7 +26,7 @@ testData.forEach(({input, output}, key) => {
   }
 });
 console.log(`The total number of errors is: ${errorCount}`);
-console.log(`The total error rate is: ${errorCount/testCount}`);
+console.log(`The total error rate is: ${errorCount / testCount}`);
 console.log(`Spend: ${(Date.now() - startTime) / 1000}s`);
 
 // 2. 使用算法

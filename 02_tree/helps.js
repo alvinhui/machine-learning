@@ -58,7 +58,7 @@ function uniqueDataSetColumn(dataSet, i) {
   return uniqueValues;
 }
 
-function majorityCnt(classList) {
+function majority(classList) {
   const classCount = {};
   for (let vote of classList) {
     if (Object.keys(classCount).indexOf(vote) === -1) {
@@ -89,5 +89,5 @@ module.exports = {
   log2,
   toZeroOne,
   uniqueDataSetColumn,
-  majorityCnt
+  majority
 };
