@@ -88,20 +88,23 @@ function createTree(dataSet, labels) {
     return majorityCnt(classList);
   }
 
-  // 找到最佳划分数据集的特征
+  // 1. 找到最佳划分数据集的特征
   const bestFeat = chooseBestFeatureToSplit(dataSet);
   debug('bestFeat %s', bestFeat);
 
   const bestFeatLabel = labels[bestFeat];
   const myTree = {[bestFeatLabel]: {}};
 
-  // 获得特征的枚举值
+  // 2. 获得特征的枚举值
   const uniqueValues = uniqueDataSetColumn(dataSet, bestFeat);
   debug('uniqueValues %o', uniqueValues);
 
+  // 3. 根据特征值划分数据（创建子节点）
   uniqueValues.forEach((value) => {
     const newDataSet = splitDataSet(dataSet, bestFeat, value);
     const subLabels = labels.filter((label, key) => key !== bestFeat);
+
+    // 4. 递归划分
     myTree[bestFeatLabel][value] = createTree(newDataSet, subLabels)
   });
 
