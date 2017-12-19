@@ -21,8 +21,10 @@ console.log('data', JSON.stringify(data[0]));
 console.log('labels', JSON.stringify(labels));
 
 // 4. 训练算法
+const startTime = Date.now();
 const tree = createTree(data, labels);
 console.log('tree', JSON.stringify(tree));
+console.log(`Spend: ${(Date.now() - startTime) / 1000}s`);
 
 // 存储学到的知识
 storeTree(tree, path.join(__dirname, 'mnist_tree.txt'));
