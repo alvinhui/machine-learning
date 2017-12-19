@@ -18,18 +18,18 @@ function calcShannonEnt(dataSet) {
   const numEntries = dataSet.length;
   for (let i in labelCounts) {
     const x = labelCounts[i];
-    const prob = x / numEntries; // p(x)
-    shannonEnt = shannonEnt - prob * log2(prob); // -Σp*log(p) 
+    const probability = x / numEntries; // p(x)
+    shannonEnt = shannonEnt - probability * log2(probability); // -Σp*log(p) 
   }
   return shannonEnt;
 }
 
-function splitDataSet(dataSet, axis, value) {
+function splitDataSet(dataSet, index, value) {
   const retDataSet = [];
   for (let featVec of dataSet) {
-    if (featVec[axis] === value) {
-      let reducedFeatVec = featVec.slice(0, axis);
-      reducedFeatVec = reducedFeatVec.concat(featVec.slice(axis + 1));
+    if (featVec[index] === value) {
+      let reducedFeatVec = featVec.slice(0, index);
+      reducedFeatVec = reducedFeatVec.concat(featVec.slice(index + 1));
       debug('reducedFeatVec %o', reducedFeatVec);
 
       retDataSet.push(reducedFeatVec);
@@ -46,14 +46,19 @@ function chooseBestFeatureToSplit(dataSet) {
   let baseEntropy = calcShannonEnt(dataSet);
   let bestInfoGain = 0.0;
   let bestFeature = -1;
+
+  // 对比每个特征划分数据的信息增益，找出最佳划分特征
   for (let i = 0, length = numberFeatures - 1; length > i; i++) {
     const uniqueValues = uniqueDataSetColumn(dataSet, i);
+
+    // 计算熵
     let newEntropy = 0.0;
     uniqueValues.forEach((value) => {
       const subDataSet = splitDataSet(dataSet, i, value);
-      const prob = subDataSet.length / dataSet.length;
-      newEntropy += prob * calcShannonEnt(subDataSet);
+      const probability = subDataSet.length / dataSet.length;
+      newEntropy += probability * calcShannonEnt(subDataSet);
     });
+
     const infoGain = baseEntropy - newEntropy;
     if (infoGain > bestInfoGain) {
       bestInfoGain = infoGain;
@@ -78,7 +83,7 @@ function createTree(dataSet, labels) {
     return classList[0]
   }
 
-  // 数据集中没有其余特征时，停止划分数据
+  // 数据集中没有其余特征时，停止划分数据，根据出现次数最多的类别作为返回值
   if (dataSet[0].length === 1) {
     return majorityCnt(classList);
   }

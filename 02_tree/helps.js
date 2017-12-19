@@ -1,12 +1,12 @@
 function createDataSet() {
   const dataSet = [
-    [1, 1, 'yes'],
-    [1, 1, 'yes'],
-    [1, 0, 'no'],
-    [0, 1, 'no'],
-    [0, 0, 'no']
+    ['Triangle', 'Small', 'Cat'],
+    ['Triangle', 'Small', 'Cat'],
+    ['Triangle', 'Big', 'Tiger'],
+    ['Circular', 'Small', 'Tiger'],
+    ['Circular', 'Big', 'Tiger'],
   ];
-  const labels = ['flight', 'wing'];
+  const labels = ['Shape', 'Size'];
   return {
     dataSet,
     labels
@@ -46,6 +46,7 @@ function log2(val) {
   return Math.log(val) / Math.LN2;
 }
 
+// 获取某个特征的所有枚举值
 function uniqueDataSetColumn(dataSet, i) {
   const uniqueValues = [];
   dataSet.forEach((element) => {

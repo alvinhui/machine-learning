@@ -4,7 +4,7 @@ const mnist = require('mnist');
 const path = require('path');
 const {testData, testCount} = require('./mnist_data');
 
-// 加载模型
+// 使用知识信息
 const tree = grabTree(path.join(__dirname, './mnist_tree.txt'));
 const labels = mnist[0].get().map((number, key) => `number_${key}`);
 

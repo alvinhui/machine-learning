@@ -10,6 +10,8 @@ const {trainingData} = require('./mnist_data');
 let data = [];
 trainingData.forEach(({input, output}) => {
   const number = String(output.indexOf(output.reduce((max, activation) => Math.max(max, activation), 0)));
+  
+  // 数值型特征转换为标称型
   data.push(toZeroOne(input).concat([number]));
 });
 const labels = mnist[0].get().map((number, key) => `number_${key}`);
@@ -22,5 +24,5 @@ console.log('labels', JSON.stringify(labels));
 const tree = createTree(data, labels);
 console.log('tree', JSON.stringify(tree));
 
-// 导出模型
+// 存储学到的知识
 storeTree(tree, path.join(__dirname, 'mnist_tree.txt'));

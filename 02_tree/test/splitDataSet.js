@@ -3,5 +3,5 @@ const {createDataSet} = require('../helps');
 
 const {dataSet} = createDataSet();
 // console.log(dataSet);
-console.log(splitDataSet(dataSet, 0, 1));
-console.log(splitDataSet(dataSet, 0, 0));
+console.log('Triangle', splitDataSet(dataSet, 0, 'Triangle'));
+console.log('Circular', splitDataSet(dataSet, 0, 'Circular'));
