@@ -69,7 +69,7 @@ function chooseBestFeatureToSplit(dataSet) {
   return bestFeature;
 }
 
-function createTree(dataSet, labels) {
+function createTree(dataSet, featureLabels) {
   const classList = dataSet.map((elements) => elements[elements.length - 1]);
   
   // 当所有的分类都属于同一类目时，停止划分数据
@@ -92,7 +92,7 @@ function createTree(dataSet, labels) {
   const bestFeat = chooseBestFeatureToSplit(dataSet);
   debug('bestFeat %s', bestFeat);
 
-  const bestFeatLabel = labels[bestFeat];
+  const bestFeatLabel = featureLabels[bestFeat];
   const myTree = {[bestFeatLabel]: {}};
 
   // 2. 获得特征的枚举值
@@ -102,7 +102,7 @@ function createTree(dataSet, labels) {
   // 3. 根据特征值划分数据（创建子节点）
   uniqueValues.forEach((value) => {
     const newDataSet = splitDataSet(dataSet, bestFeat, value);
-    const subLabels = labels.filter((label, key) => key !== bestFeat);
+    const subLabels = featureLabels.filter((label, key) => key !== bestFeat);
 
     // 4. 递归划分
     myTree[bestFeatLabel][value] = createTree(newDataSet, subLabels)
@@ -111,14 +111,14 @@ function createTree(dataSet, labels) {
   return myTree;
 }
 
-function classify(inputTree, featLabels, testVec) {
+function classify(inputTree, featureLabels, testVec) {
   const firstStr = Object.keys(inputTree)[0];
-  const secondDict = inputTree[firstStr];
-  const featIndex = featLabels.indexOf(firstStr);
+  const secondElement = inputTree[firstStr];
+  const featIndex = featureLabels.indexOf(firstStr);
   const key = testVec[featIndex];
-  const valueOfFeat = secondDict[key];
+  const valueOfFeat = secondElement[key];
   if (typeof valueOfFeat === 'object') {
-    return classify(valueOfFeat, featLabels, testVec);
+    return classify(valueOfFeat, featureLabels, testVec);
   } else {
     return valueOfFeat;
   }
