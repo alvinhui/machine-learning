@@ -5,7 +5,7 @@
   ```javascript
   $ node test.js
   ```
-- [基于朴素贝叶斯实现聊天机器人](chatbot/index.js)
+- [基于朴素贝叶斯实现聊天机器人](chatbot/app.js)
 
   ```javascript
   $ node chatbox/app.js
