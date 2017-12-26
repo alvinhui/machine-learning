@@ -1,5 +1,8 @@
 # 朴素贝叶斯
 
+- [朴素贝叶斯实现](naiveBayes.js)
+- [基于朴素贝叶斯实现聊天机器人](./chatbox)
+
 ## 参考资料
 
 * [Naive Bayes and Text Classification – Introduction and Theory](http://sebastianraschka.com/Articles/2014_naive_bayes_1.html)
