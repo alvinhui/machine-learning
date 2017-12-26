@@ -1,7 +1,15 @@
 # 朴素贝叶斯
 
-- [朴素贝叶斯实现](naiveBayes.js)
+- [朴素贝叶斯的实现](naiveBayes.js)
+
+  ```javascript
+  $ node test.js
+  ```
 - [基于朴素贝叶斯实现聊天机器人](chatbot/index.js)
+
+  ```javascript
+  $ node chatbox/app.js
+  ```
 
 ## 参考资料
 
