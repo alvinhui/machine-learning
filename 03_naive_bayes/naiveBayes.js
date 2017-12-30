@@ -61,15 +61,21 @@ function train(matrix, categories) {
   const numTrainDocs = matrix.length;
   const numWords = matrix[0].length;
   labels.forEach((label) => {
-    let pNum = math.zeros(numWords);
-    let pDenominator = 0.0;
+
+    // 计算 p(w0|1)p(w1|1)p(w2|1)，如果其中一个概率值为 0，则最后乘积也为 0。
+    // 为降低这种影响，将所有词出现数初始化为 1， 并将分母初始化为 2。
+    let pNum = math.ones(numWords); // math.zeros
+    let pDenominator = 2.0; // 1.0
     for (let i = 0; (numTrainDocs - 1) > i; ++i) {
       if (categories[i] === label) {
         pNum = math.add(pNum, matrix[i]);
         pDenominator += math.sum(matrix[i]);
       }
     }
-    const pVec = math.divide(pNum, pDenominator);
+
+    // 计算乘积 p(w0|c1)p(w1|c1)p(w2|ci)...p(wN|ci) 时由于大多数因子都非常小，所以程序会得到不正确的答案。
+    // 通过求对数可以避免下溢出或者浮点数舍入导致的错误。
+    const pVec = math.log(math.divide(pNum, pDenominator));
     weights.push({
       label,
       pVec
@@ -84,6 +90,10 @@ function train(matrix, categories) {
 function classify(vec2Classify, weights, pAbusive) {
   const probabilities = [];
   weights.forEach(({label, pVec}) => {
+
+    // 应用条件概率，公式：
+    // 因为分母对于所有类别为常数，因为我们只要将分子最大化即可（因此不需要除以 p(x)）
+    // 又因为各特征属性是条件独立的，所以有：
     const probability = math.sum(math.multiply(vec2Classify, pVec)) + math.log(pAbusive);
     probabilities.push({
       probability,
