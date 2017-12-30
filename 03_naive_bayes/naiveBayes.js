@@ -93,7 +93,7 @@ function classify(vec2Classify, weights, pAbusive) {
       label
     });
   });
-  return maxBy(probabilities, (o) => { return o.probability; }).label;
+  return maxBy(probabilities, (o) => o.probability).label;
 }
 
 module.exports = {
