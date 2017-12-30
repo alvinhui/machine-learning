@@ -54,30 +54,27 @@ function train(matrix, categories) {
       labels.push(category);
     }
   });
+
   const pAbusive = 1 / labels.length;
 
+  const weights = [];
   const numTrainDocs = matrix.length;
   const numWords = matrix[0].length;
-  const weights = [];
-
   labels.forEach((label) => {
     let pNum = math.zeros(numWords);
     let pDenominator = 0.0;
-
     for (let i = 0; (numTrainDocs - 1) > i; ++i) {
       if (categories[i] === label) {
         pNum = math.add(pNum, matrix[i]);
         pDenominator += math.sum(matrix[i]);
       }
     }
-
     const pVec = math.divide(pNum, pDenominator);
     weights.push({
       label,
       pVec
     });
   });
-
   return {
     weights,
     pAbusive
