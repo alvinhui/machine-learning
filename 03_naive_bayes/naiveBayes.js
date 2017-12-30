@@ -1,4 +1,5 @@
 const math = require('mathjs');
+const maxBy = require('lodash.maxby');
 
 function loadDataSet() {
   const document = [
@@ -46,41 +47,53 @@ function document2VecList(document) {
   return list;
 }
 
-// 二分类训练
-function train(matrix, categories, debug = false) {
+function train(matrix, categories) {
+  const labels = [];
+  categories.forEach((category) => {
+    if (labels.indexOf(category) === -1) {
+      labels.push(category);
+    }
+  });
+  const pAbusive = 1 / labels.length;
+
   const numTrainDocs = matrix.length;
   const numWords = matrix[0].length;
-  const pAbusive = 0.5;
-  let p0Num = math.zeros(numWords);
-  let p1Num = math.zeros(numWords);
-  let p0Denominator = 0.0, 
-    p1Denominator = 0.0;
+  const weights = [];
 
-  for (let i = 0; (numTrainDocs - 1) > i; ++i) {
-    if (categories[i] === 1) {
-      p1Num = math.add(p1Num, matrix[i]);
-      p1Denominator += math.sum(matrix[i]);
-    } else {
-      p0Num = math.add(p0Num, matrix[i]);
-      p0Denominator += math.sum(matrix[i]);
+  labels.forEach((label) => {
+    let pNum = math.zeros(numWords);
+    let pDenominator = 0.0;
+
+    for (let i = 0; (numTrainDocs - 1) > i; ++i) {
+      if (categories[i] === label) {
+        pNum = math.add(pNum, matrix[i]);
+        pDenominator += math.sum(matrix[i]);
+      }
     }
-  }
 
-  const p1Vec = math.divide(p1Num, p1Denominator);
-  const p0Vec = math.divide(p0Num, p0Denominator);
+    const pVec = math.divide(pNum, pDenominator);
+    weights.push({
+      label,
+      pVec
+    });
+  });
 
   return {
-    p1Vec,
-    p0Vec,
+    weights,
     pAbusive
   };
 }
 
-// 二分类预测
-function classify(vec2Classify, p0Vec, p1Vec, pClass1) {
-  const p1 = math.sum(math.multiply(vec2Classify, p1Vec)) + math.log(pClass1);
-  const p0 = math.sum(math.multiply(vec2Classify, p0Vec)) + math.log(1.0 - pClass1);
-  return p1 > p0 ? 1 : 0;
+function classify(vec2Classify, weights, pAbusive) {
+  const probabilities = [];
+  weights.forEach(({label, pVec}) => {
+    const probability = math.sum(math.multiply(vec2Classify, pVec)) + math.log(pAbusive);
+    probabilities.push({
+      probability,
+      label
+    });
+  });
+  return maxBy(probabilities, (o) => { return o.probability; }).label;
 }
 
 module.exports = {

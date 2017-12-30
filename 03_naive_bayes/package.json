@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "naiveBayes.js",
   "dependencies": {
+    "lodash.maxby": "^4.6.0",
     "mathjs": "^3.18.0"
   },
   "engines": {

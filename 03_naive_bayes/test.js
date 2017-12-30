@@ -19,18 +19,17 @@ for (const words of document) {
 console.log('trainMat', JSON.stringify(trainMat));
 console.log('classVec', classVec);
 
-const {p0Vec, p1Vec, pAbusive} = train(trainMat, classVec, true);
+const {weights, pAbusive} = train(trainMat, classVec, true);
 
-console.log('p0Vec', JSON.stringify(p0Vec));
-console.log('p1Vec', JSON.stringify(p1Vec));
+console.log('weights', JSON.stringify(weights));
 console.log('pAbusive', pAbusive);
 
 const testEntry = ['love', 'my', 'dalmation'];
 const testVec = words2Vec(vocabList, testEntry);
 console.log('testEntry', testEntry);
-console.log('classified as:', classify(testVec, p0Vec, p1Vec, pAbusive));
+console.log('classified as:', classify(testVec, weights, pAbusive));
 
 const testEntry2 = ['stupid', 'garbage'];
 const testVec2 = words2Vec(vocabList, testEntry2);
 console.log('testEntry2', testEntry2);
-console.log('classified as:', classify(testVec2, p0Vec, p1Vec, pAbusive));
+console.log('classified as:', classify(testVec2, weights, pAbusive));
