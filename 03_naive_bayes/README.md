@@ -2,12 +2,12 @@
 
 - [朴素贝叶斯的实现](naiveBayes.js)
 
-  ```javascript
+  ```bash
   $ node test.js
   ```
 - [基于朴素贝叶斯实现聊天机器人](chatbot/app.js)
 
-  ```javascript
+  ```bash
   $ node chatbox/app.js
   $ Hello
   $ Hello, thanks for visiting
