@@ -3,8 +3,7 @@
     {
       "tag": "greeting",
       "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day"],
-      "responses": ["Hello, thanks for visiting", "Good to see you again", "Hi there, how can I help?"],
-      "context_set": ""
+      "responses": ["Hello, thanks for visiting", "Good to see you again", "Hi there, how can I help?"]
     },
     {
       "tag": "goodbye",
@@ -39,12 +38,12 @@
     {
       "tag": "rental",
       "patterns": ["Can we rent a moped?", "I'd like to rent a moped", "How does this work?" ],
-      "responses": ["Are you looking to rent today or later this week?"],
+      "responses": ["Are you looking to rent today or later this week?"]
     },
     {
       "tag": "today",
-      "patterns": ["today"],
-      "responses": ["For rentals today please call 1-800-MYMOPED", "Same-day rentals please call 1-800-MYMOPED"],
+      "patterns": ["today", "now on", "now", "later"],
+      "responses": ["For rentals today please call 1-800-MYMOPED", "Same-day rentals please call 1-800-MYMOPED"]
     }
   ]
 }

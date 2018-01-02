@@ -19,7 +19,7 @@ for (const words of document) {
 console.log('trainMat', JSON.stringify(trainMat));
 console.log('classVec', classVec);
 
-const {weights, pAbusive} = train(trainMat, classVec, true);
+const {weights, pAbusive} = train(trainMat, classVec);
 
 console.log('weights', JSON.stringify(weights));
 console.log('pAbusive', pAbusive);
