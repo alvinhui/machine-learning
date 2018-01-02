@@ -9,6 +9,8 @@
 
   ```javascript
   $ node chatbox/app.js
+  $ Hello
+  $ Hello, thanks for visiting
   ```
 
 ## 参考资料
