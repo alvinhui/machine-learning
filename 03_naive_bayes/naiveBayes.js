@@ -59,7 +59,7 @@ function words2Vec(vocabList, inputSet) {
     if (index > -1) {
       returnVec[index] = 1;
     } else {
-      console.info(`The word: ${word} is not in vocabulary.`);
+      // console.info(`The word: ${word} is not in vocabulary.`);
     }
   }
   return returnVec;
