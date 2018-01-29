@@ -1,4 +1,4 @@
-const {intents} = require('./trainingData.json');
+const {intents} = require('./trainingData_chinese.json');
 const { tokenizer, createVocabList, words2Vec, train, storeModel } = require('../naiveBayes');
 const path = require('path');
 
@@ -29,4 +29,4 @@ console.log('trainMat', JSON.stringify(trainMat));
 const model = train(trainMat, classes);
 model.vocabList = vocabList;
 model.responses = responses;
-storeModel(model, path.join(__dirname, 'model.txt'));
+storeModel(model, path.join(__dirname, 'model_chinese.txt'));

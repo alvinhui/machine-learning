@@ -2,7 +2,7 @@ const { classify, grabModel, words2Vec, tokenizer, listen } = require('../naiveB
 const path = require('path');
 const random = require('lodash.random');
 
-const {weights, pAbusive, vocabList, responses} = grabModel(path.join(__dirname, './model.txt'));
+const {weights, pAbusive, vocabList, responses} = grabModel(path.join(__dirname, './model_chinese.txt'));
 
 function response(tag) {
   const sentences = responses[tag];
