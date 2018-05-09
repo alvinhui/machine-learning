@@ -1,4 +1,5 @@
 const {intents} = require('./trainingData_chinese.json');
+const nodejieba = require('nodejieba');
 const { tokenizer, createVocabList, words2Vec, train, storeModel } = require('../naiveBayes');
 const path = require('path');
 
@@ -8,7 +9,8 @@ const responses = {};
 intents.forEach(function(intent) {
   const {patterns, tag} = intent;
   patterns.forEach(function(pattern) {
-    const words = tokenizer(pattern);
+    // const words = tokenizer(pattern);
+    const words = nodejieba.cut(pattern);
     document.push(words);
     classes.push(tag);
   });

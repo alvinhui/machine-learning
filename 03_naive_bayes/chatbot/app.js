@@ -1,6 +1,7 @@
 const { classify, grabModel, words2Vec, tokenizer, listen } = require('../naiveBayes');
 const path = require('path');
 const random = require('lodash.random');
+const nodejieba = require('nodejieba');
 
 const {weights, pAbusive, vocabList, responses} = grabModel(path.join(__dirname, './model_chinese.txt'));
 
@@ -11,7 +12,9 @@ function response(tag) {
 
 listen(function(text) {
   if (text.length) {
-    const testVec = words2Vec(vocabList, tokenizer(text));
+    // const words = tokenizer(text);
+    const words = nodejieba.cut(text);
+    const testVec = words2Vec(vocabList, words);
     console.log(response(classify(testVec, weights, pAbusive)));
   } else {
     console.log('Any help?');

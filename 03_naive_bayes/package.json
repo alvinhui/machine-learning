@@ -4,7 +4,8 @@
   "main": "naiveBayes.js",
   "dependencies": {
     "lodash.maxby": "^4.6.0",
-    "mathjs": "^3.18.0"
+    "mathjs": "^3.18.0",
+    "nodejieba": "^2.2.5"
   },
   "engines": {
     "node": ">= 8.0.0"
