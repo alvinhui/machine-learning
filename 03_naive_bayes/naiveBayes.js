@@ -122,10 +122,13 @@ function classify(vec2Classify, weights, pAbusive) {
     // 因为分母对于所有类别为常数，因为我们只要将分子最大化即可（因此不需要除以 p(x)）
     // 又因为各特征属性是条件独立的，所以有：
     const probability = math.sum(math.multiply(vec2Classify, pVec)) + math.log(pAbusive);
-    probabilities.push({
+    const pc = {
       probability,
       label
-    });
+    };
+    console.log('result: ', pc);
+
+    probabilities.push(pc);
   });
   return maxBy(probabilities, (o) => o.probability).label;
 }
