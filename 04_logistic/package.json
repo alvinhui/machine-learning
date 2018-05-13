@@ -1,0 +1,15 @@
+{
+  "name": "logistic",
+  "version": "1.0.0",
+  "main": "logistic.js",
+  "dependencies": {
+    "machine_learning": "^0.1.1",
+    "nodejieba": "^2.2.5"
+  },
+  "engines": {
+    "node": ">= 8.0.0"
+  },
+  "devDependencies": {
+    "readline": "^1.3.0"
+  }
+}
