@@ -26,12 +26,10 @@ dirnames.forEach(function(dirname) {
 });
 
 // console.log('intents', intents);
-console.log('training data length: ', trainingDataLength);
-console.log('validate data length: ', validateDataLength);
 
 // 对原始数据进行格式化
-const limitTrain = 70;
-const limitValidate = 30;
+const limitTrain = 30;
+const limitValidate = 70;
 const examples = {};
 for (let key in intents) {
   const {train, validate} = intents[key];
@@ -117,7 +115,7 @@ function evaluate(trainType) {
 
 const startTime = Date.now();
 
-classifier.trainParallel(() => evaluate('trainParallel'));
+// classifier.trainParallel(() => evaluate('trainParallel'));
 
-// classifier.train();
-// evaluate('train');
+classifier.train();
+evaluate('train');
