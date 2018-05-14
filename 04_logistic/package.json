@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "logistic.js",
   "dependencies": {
-    "natural": "^0.5.6",
     "nodejieba": "^2.2.5"
   },
   "engines": {

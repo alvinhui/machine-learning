@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const dataPath = path.join(__dirname, '../../data/');
+const dataPath = path.join(__dirname, '../data/');
 const dirnames = fs.readdirSync(dataPath);
 const natural = require('natural');
-const {tokenizer, trim} = require('../../utils');
+const {tokenizer, trim} = require('../utils');
 
 const intents = {};
 
