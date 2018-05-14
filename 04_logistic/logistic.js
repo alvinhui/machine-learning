@@ -6,10 +6,13 @@
 var math = require('./math');
 let LogisticRegression = module.exports = function (settings) {
     var self = this;
-    self.x = settings['input'];
-    self.y = settings['label'];
-    self.W = math.zeroMat(settings['n_in'],settings['n_out']);
-    self.b = math.zeroVec(settings['n_out']);
+    if (settings) {
+        self.x = settings['input'];
+        self.y = settings['label'];
+        self.W = math.zeroMat(settings['n_in'],settings['n_out']);
+        self.b = math.zeroVec(settings['n_out']);
+    }
+    
     self.settings = {
         'log level' : 1 // 0 : nothing, 1 : info, 2: warn
     };
