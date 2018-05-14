@@ -1,4 +1,4 @@
-const {intents} = require('./trainingData_chinese.json');
+const {intents} = require('../trainingData_chinese.json');
 const {Classifier} = require('../utils');
 
 const classifier = new Classifier();
