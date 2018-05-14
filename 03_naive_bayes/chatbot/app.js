@@ -1,7 +1,8 @@
-const { classify, grabModel, words2Vec, tokenizer, listen } = require('../naiveBayes');
+const { classify, words2Vec } = require('../naiveBayes');
 const path = require('path');
 const random = require('lodash.random');
 const nodejieba = require('nodejieba');
+const { grabModel, tokenizer, listen } = require('../../utils');
 
 const {weights, pAbusive, vocabList, responses} = grabModel(path.join(__dirname, './model_chinese.txt'));
 

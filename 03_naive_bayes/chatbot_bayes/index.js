@@ -3,7 +3,7 @@
 const bayes = require('bayes')
 const nodejieba = require('nodejieba');
 const { intents } = require('../chatbot/trainingData_chinese.json');
-const { listen } = require('../naiveBayes');
+const { listen } = require('../../utils');
 
 const classifier = bayes({
   tokenizer: (s) => nodejieba.cut(s)

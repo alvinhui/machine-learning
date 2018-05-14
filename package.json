@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "webworker-threads": "^0.7.13"
+  }
+}

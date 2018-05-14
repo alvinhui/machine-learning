@@ -1,6 +1,7 @@
 const {intents} = require('./trainingData_chinese.json');
 const nodejieba = require('nodejieba');
-const { tokenizer, createVocabList, words2Vec, train, storeModel } = require('../naiveBayes');
+const { createVocabList, words2Vec, train } = require('../naiveBayes');
+const { storeModel, tokenizer } = require('../../utils');
 const path = require('path');
 
 const document = [];

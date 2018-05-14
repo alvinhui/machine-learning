@@ -1,4 +1,4 @@
-const { listen } = require('../utils');
+const { listen } = require('../../utils');
 const natural = require('natural');
 const nodejieba = require('nodejieba');
 const path = require('path');
@@ -12,4 +12,3 @@ natural.LogisticRegressionClassifier.load(path.join(__dirname, 'model_chinese.js
     }
   });
 });
-

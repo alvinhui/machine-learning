@@ -1,29 +1,6 @@
-const fs = require('fs');
 const nodejieba = require('nodejieba');
 const LogisticRegression = require('./logistic');
-const path = require('path');
-const readline = require('readline');
-
-function listen(handle) {
-  const _ = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
-  _.on('line', (line) => {
-    line = line || '';
-    if (line.toLowerCase() == 'quit') {
-      _.close();
-      process.exit();
-    } else {
-      handle && handle(line);
-    }
-  });
-}
-
-function storeModel(data, filename) {
-  fs.writeFileSync(filename, JSON.stringify(data));
-}
-
-function grabModel(filename) {
-  return JSON.parse(fs.readFileSync(filename, 'utf8'))
-}
+const {storeModel, grabModel} = require('../utils');
 
 const Classifier = function(classifier, stemmer) {
   this.docs = [];
@@ -144,6 +121,5 @@ Classifier.prototype.predict = function(text) {
 };
 
 module.exports = {
-  Classifier,
-  listen
+  Classifier
 };

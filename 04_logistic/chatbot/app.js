@@ -1,5 +1,5 @@
-const { listen } = require('../utils');
-const {Classifier} = require('../utils');
+const { listen } = require('../../utils');
+const { Classifier } = require('../utils');
 
 const classifier = new Classifier();
 classifier.load();

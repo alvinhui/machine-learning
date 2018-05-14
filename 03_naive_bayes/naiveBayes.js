@@ -1,7 +1,6 @@
 const math = require('mathjs');
 const maxBy = require('lodash.maxby');
 const fs = require('fs');
-const readline = require('readline');
 
 function loadDataSet() {
   const document = [
@@ -17,27 +16,6 @@ function loadDataSet() {
     document,
     classVec
   };
-}
-
-function tokenizer(sentence) {
-  return sentence.split(' ').map((word) => trim(word));
-}
-
-function trim(word) {
-  return word.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g,"")
-}
-
-function listen(handle) {
-  const _ = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
-  _.on('line', (line) => {
-    line = line || '';
-    if (line.toLowerCase() == 'quit') {
-      _.close();
-      process.exit();
-    } else {
-      handle && handle(line);
-    }
-  });
 }
 
 function regularizeWord(word) {
@@ -133,23 +111,11 @@ function classify(vec2Classify, weights, pAbusive) {
   return maxBy(probabilities, (o) => o.probability).label;
 }
 
-function storeModel(data, filename) {
-  fs.writeFileSync(filename, JSON.stringify(data));
-}
-
-function grabModel(filename) {
-  return JSON.parse(fs.readFileSync(filename, 'utf8'))
-}
-
 module.exports = {
   loadDataSet,
-  tokenizer,
   createVocabList,
   words2Vec,
   document2VecList,
   train,
-  classify,
-  storeModel,
-  grabModel,
-  listen
+  classify
 };
