@@ -25,8 +25,6 @@ dirnames.forEach(function(dirname) {
   }
 });
 
-// console.log('intents', intents);
-
 // 对原始数据进行格式化
 const limitTrain = 30;
 const limitValidate = 70;
@@ -93,8 +91,18 @@ function evaluate(trainType) {
 
   let correct = 0;
   let total = 0;
+  const scores = {};
   for (let key in examples) {
     const data = examples[key];
+    scores[key] = {
+      precision: 0,
+      recall: 0,
+      f1: 0
+    };
+    
+    let tp = 0;
+    let fp = 0;
+
     const {validate} = data;
 
     for (let words of validate) {
@@ -107,15 +115,15 @@ function evaluate(trainType) {
     }
   }
 
-  const accuracy = correct / total;
-  const precision = 0;
-  console.log('accuracy: ', accuracy);
   console.log(`${trainType} spend: ${(Date.now() - startTime) / 1000}s`);
+
+  const accuracy = correct / total;
+  console.log('accuracy: ', accuracy);
 }
 
 const startTime = Date.now();
 
-// classifier.trainParallel(() => evaluate('trainParallel'));
+classifier.trainParallel(() => evaluate('trainParallel'));
 
-classifier.train();
-evaluate('train');
+// classifier.train();
+// evaluate('train');
