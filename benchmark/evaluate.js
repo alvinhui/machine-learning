@@ -7,7 +7,7 @@ const dataPath = path.join(__dirname, '../data/');
 const dirnames = fs.readdirSync(dataPath);
 
 module.exports = function(classifier, options, filename) {
-  const {learn, classify, train} = options;
+  const {learn, classify, train, useModelAfterTrain} = options;
 
   /** 获取原始数据中获取数据集（分词） **/
 
@@ -73,25 +73,28 @@ module.exports = function(classifier, options, filename) {
     classifier[learn](x, y);
   }
 
+  const model = classifier[train]();
+  console.log('trained.');
+  
   /** 进行评价 **/
-  function evaluate() {
-    const yPred = [];
-    const yTrue = [];
-    for (let {x, y} of testDateset) {
-      const label = classifier[classify](x);
-      yPred.push(label);
-      yTrue.push(y);
+  const yPred = [];
+  const yTrue = [];
+  for (let {x, y} of testDateset) {
+    let label;
+    if (useModelAfterTrain) {
+      label = model[classify](x);
+    } else {
+      label = classifier[classify](x);
     }
-
-    console.log('yTrue: ', JSON.stringify(yTrue));
-    console.log('yPred: ', JSON.stringify(yPred));
-
-    storeModel({yTrue, yPred}, filename);
-
-    console.log('done.');
+    
+    yPred.push(label);
+    yTrue.push(y);
   }
 
-  classifier[train]();
+  console.log('yTrue: ', JSON.stringify(yTrue));
+  console.log('yPred: ', JSON.stringify(yPred));
 
-  evaluate();
+  storeModel({yTrue, yPred}, filename);
+
+  console.log('done.');
 }
