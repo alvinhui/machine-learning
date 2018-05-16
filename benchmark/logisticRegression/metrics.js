@@ -1,9 +1,5 @@
-const {yTrue, yPred} = require('./result.json');
+const evaluate = require('./evaluate.json');
+const metrics = require('../metrics');
+const path = require('path');
 
-console.log('yTrue', yTrue.length);
-console.log('yPred', yPred.length);
-
-const accuracy = require('../../accuracy');
-const result = accuracy(yTrue, yPred);
-
-console.log('accuracy', result);
+metrics(evaluate, path.join(__dirname, 'metrics.json'));

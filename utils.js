@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 function storeModel(data, filename) {
-  fs.writeFileSync(filename, JSON.stringify(data));
+  fs.writeFileSync(filename, JSON.stringify(data, null, 2));
 }
 
 function grabModel(filename) {
