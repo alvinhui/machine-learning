@@ -1,0 +1,1 @@
+Download and unzip `GoogleNews-vectors-negative300-SLIM.bin.gz` from [word2vec-slim](https://github.com/eyaler/word2vec-slim) before run this benchmark.
