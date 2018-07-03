@@ -45,8 +45,8 @@ class Tokenizer {
   }
 
   cut(sentence) {
-    const DAG = this.getDAG(sentence); console.log('DAG\n', DAG);
-    const route = this.calculate(sentence, DAG); console.log('route\n', route);
+    const DAG = this.getDAG(sentence); //console.log('DAG\n', DAG);
+    const route = this.calculate(sentence, DAG); //console.log('route\n', route);
     
     const tokens = [];
     let x = 0;

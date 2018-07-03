@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "lodash.maxby": "^4.6.0"
+  }
+}
